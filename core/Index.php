@@ -28,12 +28,9 @@ class Index {
 		Skeleton\Main::boot();
 		Skeleton\Middle::boot();
 		Skeleton\MobileNavigation::boot();
-		Skeleton\Preface::boot();
 		Skeleton\Sidebar::boot();
 		Skeleton\SidebarCta::boot();
 		Skeleton\Site::boot();
-		Skeleton\StickyFooter::boot();
-		Skeleton\StickyHeader::boot();
 
 		// Hooks.
 		Hooks\Menus::boot();
