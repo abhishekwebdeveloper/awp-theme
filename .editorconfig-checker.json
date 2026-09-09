@@ -1,0 +1,10 @@
+{
+	"Exclude": [
+		"assets/",
+		"composer\\.lock$",
+		"node_modules/",
+		"pnpm-lock\\.yaml$",
+		"vendor/",
+		"\\.min\\.(css|js)$"
+	]
+}

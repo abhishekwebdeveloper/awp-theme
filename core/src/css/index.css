@@ -1,0 +1,17 @@
+/**
+ * Theme Core CSS Index.
+ */
+
+@layer theme, base, components, pages, utilities;
+
+/* Theme. */
+@import './theme/colors.css' layer(theme);
+@import './theme/keyframes.css' layer(theme);
+@import './theme/radius.css' layer(theme);
+@import './theme/shadows.css' layer(theme);
+@import './theme/spacing.css' layer(theme);
+@import './theme/transitions.css' layer(theme);
+@import './theme/typography.css' layer(theme);
+
+/* Base. */
+@import './base/preflight.css' layer(base);

@@ -1,6 +1,6 @@
 <?php
 /**
- * Generic fallback template.
+ * Not Found (404) template.
  *
  * @package abhishekWebDeveloper\AwpTheme
  * @author  abhishekWebDeveloper.com

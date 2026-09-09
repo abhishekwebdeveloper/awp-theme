@@ -1,0 +1,15 @@
+{
+	"config": {
+		"MD010": {
+			"code_blocks": false // Allow tabs in fenced code blocks — Prettier uses tabs per .prettierrc (useTabs: true).
+		},
+		"MD013": false, // Disable line length limit.
+		"MD024": {
+			"siblings_only": true // Allow same heading text under different parents (changelog pattern).
+		},
+		"MD029": false, // Allow ordered lists interrupted by prose / blockquote / checkpoint callouts.
+		"MD041": false, // Allow missing top-level heading.
+		"MD060": false // Allow compact table style (no surrounding spaces around pipes).
+	},
+	"ignores": ["assets/**", "node_modules/**", "vendor/**"]
+}

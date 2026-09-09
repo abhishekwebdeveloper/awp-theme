@@ -1,6 +1,6 @@
 <?php
 /**
- * Generic fallback template.
+ * Product single template.
  *
  * @package abhishekWebDeveloper\AwpTheme
  * @author  abhishekWebDeveloper.com

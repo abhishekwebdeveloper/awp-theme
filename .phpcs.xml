@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<ruleset name="WordPress Theme Coding Standards">
+	<!-- See https://github.com/PHPCSStandards/PHP_CodeSniffer/wiki/Annotated-Ruleset -->
+	<!-- See https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards -->
+	<!-- See https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards/wiki -->
+	<!-- See https://github.com/PHPCompatibility/PHPCompatibility -->
+
+	<!-- Set a description for this ruleset. -->
+	<description>A custom set of code standard rules to check for WordPress Themes.</description>
+
+	<!--
+		Pass some flags to PHPCS:
+		p flag: Show progress of the run.
+		s flag: Show sniff codes in all reports.
+		v flag: Print verbose output.
+	-->
+	<arg value="psv"/>
+
+	<!-- Strip the filepaths down to the relevant bit. -->
+	<arg name="basepath" value="./"/>
+
+	<!-- Check 12 files simultaneously. -->
+	<arg name="parallel" value="12"/>
+
+	<!-- Check PHP files only. -->
+	<arg name="extensions" value="php"/>
+
+	<!-- Use colors in output. -->
+	<arg name="colors"/>
+
+	<!-- Check all files in this directory and the directories below it. -->
+	<file>.</file>
+
+	<!-- Exclude patterns. -->
+	<exclude-pattern>**/src/**</exclude-pattern>
+	<exclude-pattern>*/assets/*</exclude-pattern>
+	<exclude-pattern>*/node_modules/*</exclude-pattern>
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+
+	<!-- Include the WordPress ruleset, with exclusions. -->
+	<rule ref="WordPress">
+		<exclude name="Universal.Arrays.DisallowShortArraySyntax.Found"/>
+		<exclude name="Universal.Operators.DisallowShortTernary.Found"/>
+	</rule>
+
+	<!-- Disallow long array syntax. -->
+	<rule ref="Generic.Arrays.DisallowLongArraySyntax.Found" />
+
+	<!-- Verify that the text_domain is set to the desired text-domain. -->
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="awp-theme" />
+			</property>
+		</properties>
+	</rule>
+
+	<!-- Verify that everything in the global namespace is prefixed with the specific prefix. -->
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array">
+				<element value="awp_theme"/>
+				<element value="abhishekWebDeveloper\AwpTheme"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!-- Exclude core, features and plugins folders from NotHyphenatedLowercase rule because
+		we are using psr-4 autoloader. -->
+	<rule ref="WordPress.Files.FileName.NotHyphenatedLowercase">
+		<exclude-pattern>/core/*</exclude-pattern>
+		<exclude-pattern>/features/*</exclude-pattern>
+		<exclude-pattern>/plugins/*</exclude-pattern>
+	</rule>
+
+	<!-- Exclude core, features and plugins folders from InvalidClassFileName rule because
+		we are using psr-4 autoloader. -->
+	<rule ref="WordPress.Files.FileName.InvalidClassFileName">
+		<exclude-pattern>/core/*</exclude-pattern>
+		<exclude-pattern>/features/*</exclude-pattern>
+		<exclude-pattern>/plugins/*</exclude-pattern>
+	</rule>
+
+	<!-- Exclude views from NonPrefixedVariable rule because they are included
+		within a function call. -->
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound">
+		<exclude-pattern>*/views/*</exclude-pattern>
+	</rule>
+
+	<!-- Exclude views from GlobalVariablesOverride rule because they are included
+		within a function call. -->
+	<rule ref="WordPress.WP.GlobalVariablesOverride.Prohibited">
+		<exclude-pattern>*/views/*</exclude-pattern>
+	</rule>
+
+	<!-- Characters allowed in the hook names. -->
+	<rule ref="WordPress.NamingConventions.ValidHookName">
+		<properties>
+			<property name="additionalWordDelimiters" value="|/" />
+		</properties>
+	</rule>
+
+	<!-- Require parameter type hints on all functions. Allow @param in docblocks (required by WPCS documentation standards). -->
+	<rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHint">
+		<exclude name="SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification"/>
+		<exclude name="SlevomatCodingStandard.TypeHints.ParameterTypeHint.UselessAnnotation"/>
+		<properties>
+			<property name="enableMixedTypeHint" value="false"/>
+		</properties>
+	</rule>
+
+	<!-- Require return type declarations on all functions. Allow @return in docblocks (required by WPCS documentation standards). -->
+	<rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHint">
+		<exclude name="SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification"/>
+		<exclude name="SlevomatCodingStandard.TypeHints.ReturnTypeHint.UselessAnnotation"/>
+		<properties>
+			<property name="enableMixedTypeHint" value="false"/>
+		</properties>
+	</rule>
+
+	<!-- Minimum supported WordPress version. -->
+	<config name="minimum_wp_version" value="6.4"/>
+
+	<!-- Include sniffs for PHP cross-version compatibility. -->
+	<config name="testVersion" value="8.0"/>
+	<rule ref="PHPCompatibility"/>
+</ruleset>

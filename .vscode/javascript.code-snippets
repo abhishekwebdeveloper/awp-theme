@@ -1,0 +1,12 @@
+{
+	"set time out": {
+		"prefix": "awp set time out",
+		"body": ["setTimeout(() => {", "\t$0", "}, ${1:3000})"],
+		"scope": "javascript",
+	},
+	"await set time out": {
+		"prefix": "awp await set time out",
+		"body": ["await new Promise((resolve) => setTimeout(resolve, ${1:3000}))"],
+		"scope": "javascript",
+	},
+}

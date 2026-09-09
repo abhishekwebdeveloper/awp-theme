@@ -1,0 +1,52 @@
+{
+	"dictionaries": ["dev-env", "general", "html", "project", "wordpress"],
+	"dictionaryDefinitions": [
+		{
+			"addWords": true,
+			"name": "dev-env",
+			"path": "./.vscode/dictionary/dev-env.txt"
+		},
+		{
+			"addWords": true,
+			"name": "general",
+			"path": "./.vscode/dictionary/general.txt"
+		},
+		{
+			"addWords": true,
+			"name": "html",
+			"path": "./.vscode/dictionary/html.txt"
+		},
+		{
+			"addWords": true,
+			"name": "project",
+			"path": "./.vscode/dictionary/project.txt"
+		},
+		{
+			"addWords": true,
+			"name": "tbd",
+			"path": "./.vscode/dictionary/tbd.txt"
+		},
+		{
+			"addWords": true,
+			"name": "wordpress",
+			"path": "./.vscode/dictionary/wordpress.txt"
+		}
+	],
+	"ignorePaths": [
+		"_local/**",
+		".claude/settings.local.json",
+		".claude/skills/**",
+		".claude/worktrees/**",
+		".env.local",
+		".env.local.example",
+		".git/**",
+		".vscode",
+		"assets/**",
+		"composer.lock",
+		"node_modules/**",
+		"plugins/AdvancedCustomFieldsPro/json/**",
+		"pnpm-lock.yaml",
+		"vendor/**"
+	],
+	"version": "0.2"
+}

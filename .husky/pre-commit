@@ -1,0 +1,10 @@
+if ! node .dev/husky/lint-staged.mjs; then
+	echo ""
+	echo "┌─────────────────────────────────────────────────────┐"
+	echo "│  Files needing manual fixes: _fix-before-commit.md  │"
+	echo "├─────────────────────────────────────────────────────┤"
+	echo "│  Full guide: .husky/README.md                       │"
+	echo "└─────────────────────────────────────────────────────┘"
+	echo ""
+	exit 1
+fi

@@ -1,0 +1,109 @@
+name: WordPress Coding Standards
+
+# Lints changed PHP files on PRs. If .phpcs.xml or composer.json
+# changed, the entire repo is re-linted instead.
+
+on:
+  pull_request:
+    paths:
+      - '.phpcs.xml'
+      - '**/*.php'
+      - 'composer.json'
+
+concurrency:
+  group: phpcs-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  phpcs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      # Detect changed PHP and config files before any expensive setup.
+      - name: Determine files to lint
+        id: changed_files
+        shell: bash
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          # Fetch by SHA (not branch ref) so we diff against the exact commit
+          # GitHub recorded as the PR base. Fetching by ref could drift if the
+          # base branch advances after the PR is opened.
+          git fetch --depth=1 origin "$BASE_SHA"
+
+          changed_php=$(git diff --name-only --diff-filter=d "$BASE_SHA" HEAD -- '*.php')
+          changed_config=$(git diff --name-only --diff-filter=d "$BASE_SHA" HEAD -- '.phpcs.xml' 'composer.json')
+
+          if [ -z "$changed_php" ] && [ -z "$changed_config" ]; then
+            echo "No PHP or config files changed — skipping PHPCS."
+            echo "has_files=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          if [ -n "$changed_config" ]; then
+            # Config change affects all files — scan the full repo.
+            files=$(git ls-files '*.php')
+            echo "scan_mode=full" >> "$GITHUB_OUTPUT"
+          else
+            files="$changed_php"
+            echo "scan_mode=changed" >> "$GITHUB_OUTPUT"
+          fi
+
+          echo "files<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$files" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+          echo "has_files=true" >> "$GITHUB_OUTPUT"
+
+      - name: Setup PHP
+        if: steps.changed_files.outputs.has_files == 'true'
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+
+      # Cache vendor/ directly so we can skip composer install on hit.
+      - name: Cache vendor
+        if: steps.changed_files.outputs.has_files == 'true'
+        id: vendor-cache
+        uses: actions/cache@v5
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php8.2-vendor-${{ hashFiles('composer.lock') }}
+
+      # PHPCS keeps a per-file cache keyed by content hash, so it's safe to
+      # share across PRs. Restore-keys allow partial reuse when ruleset or
+      # dependencies change.
+      - name: Cache PHPCS results
+        if: steps.changed_files.outputs.has_files == 'true'
+        uses: actions/cache@v5
+        with:
+          path: .phpcs.cache
+          key: phpcs-${{ runner.os }}-php8.2-${{ hashFiles('.phpcs.xml', 'composer.lock') }}
+          restore-keys: phpcs-${{ runner.os }}-php8.2-
+
+      - name: Install Composer dependencies
+        if: steps.changed_files.outputs.has_files == 'true' && steps.vendor-cache.outputs.cache-hit != 'true'
+        shell: bash
+        run: composer install --prefer-dist --no-progress --no-interaction
+
+      - name: Run PHPCS
+        if: steps.changed_files.outputs.has_files == 'true'
+        shell: bash
+        env:
+          CHANGED_FILES: ${{ steps.changed_files.outputs.files }}
+          SCAN_MODE: ${{ steps.changed_files.outputs.scan_mode }}
+        run: |
+          file_list="${RUNNER_TEMP}/phpcs-file-list.txt"
+          echo "$CHANGED_FILES" > "$file_list"
+
+          if [ "$SCAN_MODE" = "full" ]; then
+            echo "Running PHPCS on all PHP files (.phpcs.xml or composer.json changed):"
+          else
+            echo "Running PHPCS on changed PHP files:"
+          fi
+          cat "$file_list"
+
+          vendor/bin/phpcs --parallel=$(nproc) --cache=.phpcs.cache --file-list="$file_list"
