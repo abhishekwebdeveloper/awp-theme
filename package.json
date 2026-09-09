@@ -1,0 +1,55 @@
+{
+	"name": "awp-theme",
+	"bugs": {
+		"email": "abhishekanjupandey@gmail.com"
+	},
+	"type": "module",
+	"engines": {
+		"node": ">=22"
+	},
+	"packageManager": "pnpm@11.5.1",
+	"scripts": {
+		"boot": "composer install && pnpm install && pnpm run build",
+		"build": "rollup -c",
+		"dev": "rollup -c -w",
+		"lint:css": "stylelint '**/*.css'",
+		"lint:editor-config": "editorconfig-checker",
+		"lint:fix": "prettier --write .; vendor/bin/phpcbf; eslint . --fix; stylelint '**/*.css' --fix",
+		"lint:js": "eslint .",
+		"lint:md": "markdownlint-cli2 '**/*.md'",
+		"lint:php": "vendor/bin/phpcs",
+		"lint:spell": "cspell --dot '**'",
+		"lint": "pnpm run lint:php && pnpm run lint:js && pnpm run lint:css && pnpm run lint:md && pnpm run lint:spell && pnpm run lint:editor-config",
+		"prepare": "husky",
+		"update-browserslist-db": "pnpm dlx update-browserslist-db@latest",
+		"zip": "pnpm run boot && pnpm run lint && node .dev/node/zip.mjs",
+		"zip:no-lint": "pnpm run boot && node .dev/node/zip.mjs"
+	},
+	"devDependencies": {
+		"@eslint/js": "^10.0.1",
+		"@rollup/plugin-commonjs": "^29.0.3",
+		"@rollup/plugin-node-resolve": "^16.0.3",
+		"@rollup/plugin-terser": "^1.0.0",
+		"archiver": "^8.0.0",
+		"autoprefixer": "^10.5.0",
+		"cspell": "^10.0.1",
+		"editorconfig-checker": "^6.1.1",
+		"eslint": "^10.4.1",
+		"eslint-config-prettier": "^10.1.8",
+		"globals": "^17.6.0",
+		"husky": "^9.1.7",
+		"lint-staged": "^17.0.7",
+		"markdownlint-cli2": "^0.22.1",
+		"postcss": "^8.5.15",
+		"postcss-import": "^16.1.1",
+		"prettier": "^3.8.3",
+		"rollup": "^4.61.1",
+		"rollup-plugin-copy": "^3.5.0",
+		"rollup-plugin-delete": "^3.0.2",
+		"rollup-plugin-livereload": "^2.0.5",
+		"rollup-plugin-postcss": "^4.0.2",
+		"stylelint": "^17.13.0",
+		"stylelint-config-standard": "^40.0.0",
+		"stylelint-order": "^8.1.1"
+	}
+}

@@ -1,0 +1,28 @@
+{
+	"overrides": [
+		{
+			"files": "*.jsonc",
+			"options": {
+				"parser": "json"
+			}
+		},
+		{
+			"files": "*.md",
+			"options": {
+				"useTabs": false,
+				"tabWidth": 2
+			}
+		},
+		{
+			"files": "plugins/AdvancedCustomFieldsPro/json/**",
+			"options": {
+				"useTabs": false,
+				"tabWidth": 4
+			}
+		}
+	],
+	"semi": false,
+	"singleQuote": true,
+	"trailingComma": "all",
+	"useTabs": true
+}

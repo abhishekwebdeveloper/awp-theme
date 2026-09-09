@@ -1,0 +1,206 @@
+{
+	"[php]": {
+		"editor.defaultFormatter": "wongjn.php-sniffer"
+	},
+	"diffEditor.ignoreTrimWhitespace": false,
+	"editor.codeActionsOnSave": {
+		"source.fixAll.stylelint": "explicit"
+	},
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.formatOnSave": true,
+	"editor.quickSuggestions": {
+		"comments": true
+	},
+	"editor.renderWhitespace": "all",
+	"editor.rulers": [80],
+	"editor.wordWrap": "on",
+	"emmet.includeLanguages": {
+		"postcss": "css"
+	},
+	"emmet.syntaxProfiles": {
+		"postcss": "css"
+	},
+	"explorer.copyRelativePathSeparator": "/",
+	"files.exclude": {
+		"**/node_modules": true,
+		"**/vendor": true
+	},
+	"files.trimFinalNewlines": true,
+	"git.autofetch": true,
+	"git.branchProtection": ["main"],
+	"git.branchProtectionPrompt": "alwaysCommitToNewBranch",
+	"git.followTagsWhenSync": true,
+	"githubIssues.issueAvatarDisplay": "assignee",
+	"githubIssues.workingBaseBranch": "defaultBranch",
+	"githubPullRequests.assignCreated": "${user}",
+	"githubPullRequests.defaultMergeMethod": "squash",
+	"githubPullRequests.pushBranch": "always",
+	"githubPullRequests.showPullRequestNumberInTree": true,
+	"htmlEndTagLabels.labelPrefix": " ",
+	"intelephense.environment.includePaths": [
+		"../../plugins/advanced-custom-fields-pro",
+		"../../plugins/elementor-pro",
+		"../../plugins/elementor",
+		"../../plugins/woocommerce"
+	],
+	"intelephense.format.enable": false,
+	"intelephense.stubs": [
+		"apache",
+		"bcmath",
+		"bz2",
+		"calendar",
+		"com_dotnet",
+		"Core",
+		"ctype",
+		"curl",
+		"date",
+		"dba",
+		"dom",
+		"enchant",
+		"exif",
+		"FFI",
+		"fileinfo",
+		"filter",
+		"fpm",
+		"ftp",
+		"gd",
+		"gettext",
+		"gmp",
+		"hash",
+		"iconv",
+		"imap",
+		"intl",
+		"json",
+		"ldap",
+		"libxml",
+		"mbstring",
+		"meta",
+		"mysqli",
+		"oci8",
+		"odbc",
+		"openssl",
+		"pcntl",
+		"pcre",
+		"PDO",
+		"pgsql",
+		"Phar",
+		"posix",
+		"pspell",
+		"random",
+		"readline",
+		"Reflection",
+		"session",
+		"shmop",
+		"SimpleXML",
+		"snmp",
+		"soap",
+		"sockets",
+		"sodium",
+		"SPL",
+		"sqlite3",
+		"standard",
+		"superglobals",
+		"sysvmsg",
+		"sysvsem",
+		"sysvshm",
+		"tidy",
+		"tokenizer",
+		"uri",
+		"xml",
+		"xmlreader",
+		"xmlrpc",
+		"xmlwriter",
+		"xsl",
+		"Zend OPcache",
+		"zip",
+		"zlib",
+		"wordpress",
+		"wooCommerce"
+	],
+	"json.schemaDownload.trustedDomains": {
+		"https://developer.microsoft.com/json-schemas/": true,
+		"https://json-schema.org/": true,
+		"https://json.schemastore.org/": true,
+		"https://raw.githubusercontent.com": true,
+		"https://raw.githubusercontent.com/devcontainers/spec/": true,
+		"https://raw.githubusercontent.com/microsoft/vscode/": true,
+		"https://schemastore.azurewebsites.net/": true,
+		"https://www.schemastore.org/": true
+	},
+	"logFileHighlighter.customPatterns": [
+		{
+			"foreground": "#fff",
+			"pattern": "\\[\\d{2}-[A-Za-z]{3}-\\d{4} \\d{2}:\\d{2}:\\d{2} UTC\\]"
+		},
+		{
+			"background": "#365314",
+			"borderRadius": "2px",
+			"foreground": "#ecfccb",
+			"pattern": "line \\d+"
+		},
+		{
+			"background": "#eab308",
+			"borderRadius": "2px",
+			"foreground": "#000",
+			"pattern": "PHP Warning"
+		},
+		{
+			"foreground": "#eab308",
+			"pattern": "PHP Deprecated"
+		},
+		{
+			"background": "#dc2626",
+			"borderRadius": "2px",
+			"foreground": "#fff",
+			"pattern": "PHP Fatal error"
+		}
+	],
+	"logViewer.showStatusBarItemOnChange": true,
+	"logViewer.watch": [
+		{
+			"pattern": "./../../debug.log",
+			"title": "debug.log"
+		}
+	],
+	"material-icon-theme.files.associations": {
+		"_fix-before-commit.md": "husky",
+		".env.local.example": "tune"
+	},
+	"material-icon-theme.folders.associations": {
+		"blocks": "interface",
+		"dialog": "messages",
+		"sections": "layout",
+		"views/content": "",
+		"views/site": ""
+	},
+	"php.suggest.basic": false,
+	"phpSniffer.autoDetect": true,
+	"prettier.documentSelectors": ["**/*.svelte"],
+	"search.exclude": {
+		".github": true,
+		"**/.git": true,
+		"**/composer.lock": true,
+		"**/node_modules": true,
+		"**/package-lock.json": true,
+		"**/pnpm-lock.yaml": true,
+		"**/vendor": true
+	},
+	"stylelint.validate": ["css", "postcss", "scss"],
+	"todo-tree.general.showActivityBarBadge": true,
+	"todo-tree.general.tags": ["BUG", "HACK", "FIXME", "TODO", "MAYBE"],
+	"todo-tree.highlights.backgroundColourScheme": [
+		"red",
+		"orange",
+		"yellow",
+		"green",
+		"violet"
+	],
+	"todo-tree.highlights.foregroundColourScheme": [
+		"white",
+		"black",
+		"black",
+		"white",
+		"black"
+	],
+	"todo-tree.highlights.useColourScheme": true
+}

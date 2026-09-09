@@ -1,0 +1,25 @@
+{
+	"name": "abhishekwebdeveloper/awp-theme",
+	"description": "A Custom WordPress theme.",
+	"support": {
+		"email": "abhishekanjupandey@gmail.com"
+	},
+	"autoload": {
+		"psr-4": {
+			"abhishekWebDeveloper\\AwpTheme\\": "core",
+			"abhishekWebDeveloper\\AwpTheme\\Features\\": "features",
+			"abhishekWebDeveloper\\AwpTheme\\Plugins\\": "plugins"
+		}
+	},
+	"require-dev": {
+		"dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+		"phpcompatibility/php-compatibility": "^9.3",
+		"slevomat/coding-standard": "^8.22",
+		"wp-coding-standards/wpcs": "^3.0"
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	}
+}

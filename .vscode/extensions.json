@@ -1,0 +1,13 @@
+{
+	"recommendations": [
+		"bmewburn.vscode-intelephense-client",
+		"DavidAnson.vscode-markdownlint",
+		"EditorConfig.EditorConfig",
+		"emilast.LogFileHighlighter",
+		"esbenp.prettier-vscode",
+		"Gruntfuggly.todo-tree",
+		"streetsidesoftware.code-spell-checker",
+		"stylelint.vscode-stylelint",
+		"wongjn.php-sniffer"
+	]
+}

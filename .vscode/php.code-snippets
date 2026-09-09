@@ -1,0 +1,89 @@
+{
+	"print_r": {
+		"prefix": "awp debug print r",
+		"body": [
+			"echo '<pre>' . htmlentities( print_r( ${1:\\$variable}, true ) ) . '</pre>';$0",
+		],
+		"scope": "php",
+	},
+	"var_dump": {
+		"prefix": "awp debug var dump",
+		"body": [
+			"echo '<pre>' . htmlentities( var_dump( ${1:\\$variable} ) ) . '</pre>';$0",
+		],
+		"scope": "php",
+	},
+	"if": {
+		"prefix": "awp if",
+		"body": ["if ( ${1:\\$condition} ) {", "\t$0", "}"],
+		"scope": "php",
+	},
+	"foreach": {
+		"prefix": "awp foreach",
+		"body": ["foreach ( ${1:\\$items} as ${2:\\$item} ) {", "\t$0", "}"],
+		"scope": "php",
+	},
+	"echo escape html": {
+		"prefix": "awp echo escape html",
+		"body": ["echo esc_html( ${1:\\$string} );$0"],
+		"scope": "php",
+	},
+	"echo escape html l10n": {
+		"prefix": "awp echo escape html l10n",
+		"body": ["echo esc_html__( '${1:string}', 'awp-${2:textdomain}' );$0"],
+		"scope": "php",
+	},
+	"echo escape attribute": {
+		"prefix": "awp echo escape attribute",
+		"body": ["echo esc_attr( ${1:\\$string} );$0"],
+		"scope": "php",
+	},
+	"echo escape attribute l10n": {
+		"prefix": "awp echo escape attribute l10n",
+		"body": ["echo esc_attr__( '${1:string}', 'awp-${2:textdomain}' );$0"],
+		"scope": "php",
+	},
+	"echo escape url": {
+		"prefix": "awp echo escape url",
+		"body": ["echo esc_url( ${1:\\$string} );$0"],
+		"scope": "php",
+	},
+	"echo kses post": {
+		"prefix": "awp echo kses post",
+		"body": ["echo wp_kses_post( ${1:\\$string} );$0"],
+		"scope": "php",
+	},
+	"echo kses with arguments": {
+		"prefix": "awp echo kses with arguments",
+		"body": ["echo wp_kses( ${1:\\$string}, [ ${2:'br' => []} ] );$0"],
+		"scope": "php",
+	},
+	"base view": {
+		"prefix": "awp base view",
+		"body": ["Base::view( '${1:views/component}' );$0"],
+		"scope": "php",
+	},
+	"base view with arguments": {
+		"prefix": "awp base view with arguments",
+		"body": [
+			"Base::view( '${1:views/component}', [",
+			"\t'${2:key}' => '${3:value}',$0",
+			"] );",
+		],
+		"scope": "php",
+	},
+	"get template part": {
+		"prefix": "awp get template part",
+		"body": ["Base::get_template_part( '${1:button}' );$0"],
+		"scope": "php",
+	},
+	"get template part with arguments": {
+		"prefix": "awp template part with arguments",
+		"body": [
+			"Base::get_template_part( '${1:button}', [",
+			"\t'${2:text}' => '${3:Button}',$0",
+			"] );",
+		],
+		"scope": "php",
+	},
+}

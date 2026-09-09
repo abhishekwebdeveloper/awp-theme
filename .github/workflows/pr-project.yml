@@ -1,0 +1,286 @@
+name: PRs Project
+
+# Updates the org project board status as PR events fire.
+# Requires:
+#   - secrets.PR_PROJECT_PAT: fine-grained PAT (resource owner: the org) with
+#     Organization > Projects: Read and write, Repository > Pull requests: Read
+#   - vars.PR_PROJECT_ORG: GitHub org name
+#   - vars.PR_PROJECT_NUMBER: project board number
+
+on:
+  pull_request:
+    types:
+      [
+        opened,
+        reopened,
+        ready_for_review,
+        review_requested,
+        synchronize,
+        closed,
+      ]
+  pull_request_review:
+    types: [submitted]
+
+concurrency:
+  group: pr-project-status-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  update-status:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - name: Validate configuration
+        shell: bash
+        env:
+          INPUT_TOKEN: ${{ secrets.PR_PROJECT_PAT }}
+          INPUT_ORG: ${{ vars.PR_PROJECT_ORG }}
+          INPUT_PROJECT_NUMBER: ${{ vars.PR_PROJECT_NUMBER }}
+        run: |
+          MISSING=()
+          [[ -z "$INPUT_TOKEN" ]] && MISSING+=("secrets.PR_PROJECT_PAT")
+          [[ -z "$INPUT_ORG" ]] && MISSING+=("vars.PR_PROJECT_ORG")
+          [[ -z "$INPUT_PROJECT_NUMBER" ]] && MISSING+=("vars.PR_PROJECT_NUMBER")
+
+          if [[ ${#MISSING[@]} -gt 0 ]]; then
+            echo "::error::Missing required configuration: ${MISSING[*]}"
+            exit 1
+          fi
+
+      - name: Determine target status
+        id: status
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.PR_PROJECT_PAT }}
+          EVENT: ${{ github.event_name }}
+          ACTION: ${{ github.event.action }}
+          REVIEW_STATE: ${{ github.event.review.state }}
+          REVIEWER_TYPE: ${{ github.event.requested_reviewer.type }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          echo "event=$EVENT action=$ACTION review_state=$REVIEW_STATE reviewer_type=$REVIEWER_TYPE"
+
+          # Pull request events.
+          if [[ "$EVENT" == "pull_request" ]]; then
+            case "$ACTION" in
+
+              opened|reopened|ready_for_review)
+                echo "target_status=In Progress" >> "$GITHUB_OUTPUT"
+                ;;
+
+              synchronize)
+                OWNER="${REPO%%/*}"
+                REPO_NAME="${REPO##*/}"
+
+                PENDING_REVIEWER_COUNT=$(gh api graphql -f query='query($owner: String!, $repo: String!, $pr: Int!) {
+                  repository(owner: $owner, name: $repo) {
+                    pullRequest(number: $pr) {
+                      reviewRequests(first: 100) { nodes { requestedReviewer { ... on User { login } ... on Team { slug } } } }
+                    }
+                  }
+                }' -f owner="$OWNER" -f repo="$REPO_NAME" -F pr="$PR_NUMBER" \
+                  -q '[.data.repository.pullRequest.reviewRequests.nodes[].requestedReviewer | select(. != null)] | length')
+
+                if [[ $? -ne 0 ]] || ! [[ "$PENDING_REVIEWER_COUNT" =~ ^[0-9]+$ ]]; then
+                  echo "::warning::Failed to query pending reviewers, skipping status update"
+                  exit 0
+                fi
+
+                if [[ "$PENDING_REVIEWER_COUNT" -gt 0 ]]; then
+                  echo "Pending reviewers exist ($PENDING_REVIEWER_COUNT), setting To Review"
+                  echo "target_status=To Review" >> "$GITHUB_OUTPUT"
+                else
+                  echo "target_status=In Progress" >> "$GITHUB_OUTPUT"
+                fi
+                ;;
+
+              review_requested)
+                if [[ "$REVIEWER_TYPE" == "Bot" ]]; then
+                  echo "Bot reviewer, skipping status update"
+                  exit 0
+                fi
+                echo "target_status=To Review" >> "$GITHUB_OUTPUT"
+                ;;
+
+              closed)
+                echo "target_status=Complete" >> "$GITHUB_OUTPUT"
+                ;;
+
+              *)
+                echo "No status mapping for action: $ACTION"
+                exit 0
+                ;;
+            esac
+
+          # Pull request review events.
+          elif [[ "$EVENT" == "pull_request_review" && "$ACTION" == "submitted" ]]; then
+            case "$REVIEW_STATE" in
+
+              changes_requested)
+                echo "target_status=Changes Requested" >> "$GITHUB_OUTPUT"
+                ;;
+
+              approved)
+                OWNER="${REPO%%/*}"
+                REPO_NAME="${REPO##*/}"
+
+                PR_REVIEW_QUERY='query($owner: String!, $repo: String!, $pr: Int!) {
+                  repository(owner: $owner, name: $repo) {
+                    pullRequest(number: $pr) {
+                      reviewRequests(first: 100) {
+                        nodes {
+                          requestedReviewer {
+                            ... on User { login }
+                            ... on Team { name: slug }
+                          }
+                        }
+                      }
+                      reviews(last: 100) {
+                        nodes {
+                          author { login }
+                          state
+                        }
+                      }
+                    }
+                  }
+                }'
+
+                PR_REVIEW_DATA=$(gh api graphql -f query="$PR_REVIEW_QUERY" \
+                  -f owner="$OWNER" -f repo="$REPO_NAME" -F pr="$PR_NUMBER" \
+                  -q '.data.repository.pullRequest')
+
+                if [[ $? -ne 0 ]] || [[ -z "$PR_REVIEW_DATA" ]] || [[ "$PR_REVIEW_DATA" == "null" ]]; then
+                  echo "::warning::Failed to query PR data, skipping status update"
+                  exit 0
+                fi
+
+                # Pending reviewers block "Approved" — keep at "To Review".
+                PENDING_REVIEWER_COUNT=$(echo "$PR_REVIEW_DATA" | jq '[.reviewRequests.nodes[].requestedReviewer | select(. != null)] | length')
+
+                if ! [[ "$PENDING_REVIEWER_COUNT" =~ ^[0-9]+$ ]]; then
+                  echo "::warning::Failed to parse pending reviewers, skipping status update"
+                  exit 0
+                fi
+
+                if [[ "$PENDING_REVIEWER_COUNT" -gt 0 ]]; then
+                  echo "Still $PENDING_REVIEWER_COUNT pending reviewer(s), setting To Review"
+                  echo "target_status=To Review" >> "$GITHUB_OUTPUT"
+                  exit 0
+                fi
+
+                # Any reviewer whose LATEST review is "changes requested" blocks approval.
+                UNRESOLVED_CHANGES_COUNT=$(echo "$PR_REVIEW_DATA" | jq '[.reviews.nodes[] | select(.author != null)] | group_by(.author.login) | map(last) | [.[] | select(.state == "CHANGES_REQUESTED")] | length')
+
+                if ! [[ "$UNRESOLVED_CHANGES_COUNT" =~ ^[0-9]+$ ]]; then
+                  echo "::warning::Failed to parse reviews, skipping status update"
+                  exit 0
+                fi
+
+                if [[ "$UNRESOLVED_CHANGES_COUNT" -gt 0 ]]; then
+                  echo "$UNRESOLVED_CHANGES_COUNT reviewer(s) still have unresolved change requests, setting Changes Requested"
+                  echo "target_status=Changes Requested" >> "$GITHUB_OUTPUT"
+                else
+                  echo "target_status=Approved" >> "$GITHUB_OUTPUT"
+                fi
+                ;;
+
+              *)
+                echo "No status mapping for review state: $REVIEW_STATE"
+                exit 0
+                ;;
+            esac
+
+          else
+            echo "No status mapping for this event"
+            exit 0
+          fi
+
+      - name: Update project board
+        if: steps.status.outputs.target_status != ''
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.PR_PROJECT_PAT }}
+          TARGET: ${{ steps.status.outputs.target_status }}
+          INPUT_ORG: ${{ vars.PR_PROJECT_ORG }}
+          INPUT_PROJECT_NUMBER: ${{ vars.PR_PROJECT_NUMBER }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+        run: |
+          # Add PR to the project board.
+          ITEM_ID=$(gh project item-add "$INPUT_PROJECT_NUMBER" --owner "$INPUT_ORG" --url "$PR_URL" --format json -q '.id')
+
+          if [[ -z "$ITEM_ID" ]]; then
+            echo "::error::Failed to add PR to project or retrieve item ID"
+            exit 1
+          fi
+
+          # Fetch project metadata: IDs for the project, fields, and options.
+          QUERY='query($org: String!, $num: Int!) {
+            organization(login: $org) {
+              projectV2(number: $num) {
+                id
+                status: field(name: "Status") {
+                  ... on ProjectV2SingleSelectField {
+                    id
+                    options { id name }
+                  }
+                }
+                activity: field(name: "Activity") {
+                  ... on ProjectV2SingleSelectField {
+                    id
+                    options { id name }
+                  }
+                }
+              }
+            }
+          }'
+          RESULT=$(gh api graphql -f query="$QUERY" -f org="$INPUT_ORG" -F num="$INPUT_PROJECT_NUMBER")
+
+          PROJECT_ID=$(echo "$RESULT" | jq -r '.data.organization.projectV2.id // empty')
+          STATUS_FIELD_ID=$(echo "$RESULT" | jq -r '.data.organization.projectV2.status.id // empty')
+          STATUS_OPTION_ID=$(echo "$RESULT" | jq -r --arg name "$TARGET" '(.data.organization.projectV2.status.options[]? | select(.name == $name) | .id) // empty')
+          ACTIVITY_FIELD_ID=$(echo "$RESULT" | jq -r '.data.organization.projectV2.activity.id // empty')
+          ACTIVITY_OPTION_ID=$(echo "$RESULT" | jq -r '(.data.organization.projectV2.activity.options[]? | select(.name == "Active") | .id) // empty')
+
+          if [[ -z "$PROJECT_ID" ]]; then
+            echo "::error::Could not find project $INPUT_PROJECT_NUMBER in org $INPUT_ORG"
+            exit 1
+          fi
+          if [[ -z "$STATUS_FIELD_ID" ]]; then
+            echo "::error::Could not find Status field on the project"
+            exit 1
+          fi
+          if [[ -z "$STATUS_OPTION_ID" ]]; then
+            echo "::error::Could not find Status option '$TARGET' on the project"
+            exit 1
+          fi
+          if [[ -z "$ACTIVITY_FIELD_ID" ]]; then
+            echo "::error::Could not find Activity field on the project"
+            exit 1
+          fi
+          if [[ -z "$ACTIVITY_OPTION_ID" ]]; then
+            echo "::error::Could not find 'Active' option on the Activity field"
+            exit 1
+          fi
+
+          # Update both fields in a single GraphQL mutation.
+          MUTATION='mutation($projectId: ID!, $itemId: ID!, $statusFieldId: ID!, $statusOptionId: String!, $activityFieldId: ID!, $activityOptionId: String!) {
+            status: updateProjectV2ItemFieldValue(input: {
+              projectId: $projectId, itemId: $itemId, fieldId: $statusFieldId,
+              value: { singleSelectOptionId: $statusOptionId }
+            }) { projectV2Item { id } }
+            activity: updateProjectV2ItemFieldValue(input: {
+              projectId: $projectId, itemId: $itemId, fieldId: $activityFieldId,
+              value: { singleSelectOptionId: $activityOptionId }
+            }) { projectV2Item { id } }
+          }'
+
+          gh api graphql -f query="$MUTATION" \
+            -f projectId="$PROJECT_ID" \
+            -f itemId="$ITEM_ID" \
+            -f statusFieldId="$STATUS_FIELD_ID" \
+            -f statusOptionId="$STATUS_OPTION_ID" \
+            -f activityFieldId="$ACTIVITY_FIELD_ID" \
+            -f activityOptionId="$ACTIVITY_OPTION_ID"
+
+          echo "Updated PR status to '$TARGET' and Activity to 'Active'"
