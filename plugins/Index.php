@@ -22,7 +22,5 @@ class Index {
 	 * Run boot tasks.
 	 */
 	protected static function on_boot(): void {
-		// Woocommerce.
-		Woocommerce\Index::boot();
 	}
 }
