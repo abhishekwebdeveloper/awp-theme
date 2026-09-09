@@ -24,6 +24,7 @@ import livereloadJsCss from './.dev/rollup/plugin-livereload-js-css.js'
 // from silently becoming bundles.
 const entryPoints = {
 	core: 'core/src/core.js',
+	alpine: 'core/src/alpine.js',
 	// 'core-admin': 'core/src/core-admin.js',
 	// woocommerce: 'plugins/Woocommerce/src/woocommerce.js',
 	// 'woocommerce-admin': 'plugins/Woocommerce/src/woocommerce-admin.js',

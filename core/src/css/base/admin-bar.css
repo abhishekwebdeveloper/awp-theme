@@ -1,0 +1,21 @@
+/**
+ * Admin Bar Height Token.
+ */
+
+:root {
+	--awp-admin-bar-height: 0px;
+}
+
+body.admin-bar {
+	--awp-admin-bar-height: 32px;
+}
+
+@media screen and (max-width: 782px) {
+	body.admin-bar {
+		--awp-admin-bar-height: 0px;
+	}
+
+	body.admin-bar[data-awp-site-scrolled='false'] {
+		--awp-admin-bar-height: 46px;
+	}
+}

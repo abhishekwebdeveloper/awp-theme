@@ -65,7 +65,10 @@ $awp_logo_url = apply_filters( 'awp_theme/logo_url', Base::get_info( 'url' ) . '
 		awp-theme-header__hamburger mask-image-hamburger mask-image-sidekick
 		before:w-7 before:h-7 before:bg-white
 		lg:hidden
-	">
+	"
+	x-data
+				@click="$dispatch('awp-open-dialog', 'mobile-navigation')"
+	>
 		<span class="sr-only">Menu</span>
 	</div>
 </nav>
