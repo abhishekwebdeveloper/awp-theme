@@ -4,6 +4,7 @@ import del from 'rollup-plugin-delete'
 import livereload from 'rollup-plugin-livereload'
 import postcss from 'rollup-plugin-postcss'
 import postcssImport from 'postcss-import'
+import tailwindcssPostcss from '@tailwindcss/postcss'
 
 // Rollup plugins.
 import commonjs from '@rollup/plugin-commonjs'
@@ -89,7 +90,7 @@ const configs = Object.keys(entryPoints).map((name, index) => ({
 			extract: `${name}.css`,
 			minimize: !isDev, // Minify production builds.
 			sourceMap: isDev, // Source maps in dev only.
-			plugins: [postcssImport(), autoprefixer()],
+			plugins: [postcssImport(), tailwindcssPostcss(), autoprefixer()],
 		}),
 
 		// Minify production builds.

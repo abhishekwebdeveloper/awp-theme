@@ -2,4 +2,5 @@ acf
 advancedcustomfields
 elementor
 preflight
+styleguide
 tailwindlabs

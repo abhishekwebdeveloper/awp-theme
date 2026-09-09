@@ -6,5 +6,6 @@ samp
 stylesheet
 tbody
 textareas
+vmax
 webp
 xlink
