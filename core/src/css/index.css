@@ -9,6 +9,7 @@
 
 /* Base. */
 @import './base/tailwind.css' layer(base);
+@import './base/tags.css' layer(base);
 
 /* Components. */
 @import './components/container.css' layer(components);

@@ -23,11 +23,27 @@ class Scripts {
 	 * Run boot tasks.
 	 */
 	protected static function on_boot(): void {
+		// Enqueue vendor scripts.
+		add_action( 'wp_enqueue_scripts', [ self::class, 'enqueue_vendor_scripts' ], 100 );
+
 		// Enqueue main scripts.
 		add_action( 'wp_enqueue_scripts', [ self::class, 'enqueue_main_scripts' ], 200 );
 
 		// Enqueue WordPress scripts.
 		add_action( 'wp_enqueue_scripts', [ self::class, 'enqueue_wp_scripts' ], 600 );
+	}
+
+		/**
+		 * Enqueue vendor scripts.
+		 */
+	public static function enqueue_vendor_scripts(): void {
+		// Google font: Urbanist.
+		wp_enqueue_style(
+			'google-font-urbanist',
+			'https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap',
+			[],
+			'1.0.0'
+		);
 	}
 
 	/**

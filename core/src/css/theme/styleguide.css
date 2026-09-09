@@ -56,6 +56,29 @@
 	/* letterSpacing */
 	--tracking-snug: -0.01em;
 
+	/* fontFamily */
+	--font-urbanist: 'Urbanist', sans-serif;
+
+	/* colors */
+	--color-awp-purple-60: #703bf7;
+	--color-awp-purple-65: #8254f8;
+	--color-awp-purple-70: #946cf9;
+	--color-awp-purple-75: #a685fa;
+	--color-awp-purple-90: #dbcefd;
+	--color-awp-purple-95: #ede7fe;
+	--color-awp-purple-97: #f4f0fe;
+	--color-awp-purple-99: #fbfaff;
+	--color-awp-grey-08: #141414;
+	--color-awp-grey-10: #1a1a1a;
+	--color-awp-grey-15: #333;
+	--color-awp-grey-30: #4d4d4d;
+	--color-awp-grey-40: #666;
+	--color-awp-grey-50: #808080;
+	--color-awp-grey-60: #999;
+	--color-awp-grey-70: #b3b3b3;
+	--color-awp-grey-80: #ccc;
+	--color-awp-grey-90: #e6e6e6;
+
 	/* transitionDuration DEFAULT */
 	--default-transition-duration: 350ms;
 }

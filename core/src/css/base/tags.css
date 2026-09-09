@@ -1,0 +1,20 @@
+/* stylelint-disable custom-property-pattern */
+/* stylelint-disable at-rule-no-unknown */
+/* stylelint-disable at-rule-prelude-no-invalid */
+
+/* -----------------------------------------------------------------------------
+ * Base > Tags.
+* -------------------------------------------------------------------------- */
+
+body {
+	@apply bg-white font-urbanist leading-normal text-awp-grey-60;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	@apply leading-tight text-awp-grey-08;
+}
