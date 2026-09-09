@@ -31,6 +31,7 @@ class Menus {
 	public static function register_menus(): void {
 		register_nav_menus(
 			[
+				'primary'  => esc_html__( 'Primary', 'awp-theme' ),
 				'footnote' => esc_html__( 'Footnote', 'awp-theme' ),
 			]
 		);

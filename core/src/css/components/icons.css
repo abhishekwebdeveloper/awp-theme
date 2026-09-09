@@ -1,0 +1,18 @@
+/* -----------------------------------------------------------------------------
+ * Components > Icons.
+* -------------------------------------------------------------------------- */
+.mask-image-sidekick {
+	position: relative;
+}
+
+.mask-image-sidekick::before {
+	content: '';
+	display: block;
+	mask-position: center center;
+	mask-repeat: no-repeat;
+	mask-size: contain;
+}
+
+.mask-image-hamburger::before {
+	mask-image: url('img/icons/icon-hamburger.svg');
+}

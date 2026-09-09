@@ -32,7 +32,7 @@ const entryPoints = {
 
 // Folders to copy to the assets folder.
 const copyFolders = {
-	// 'assets/img': ['src/img/**/*'],
+	assets: ['core/src/img'],
 }
 
 // WordPress dependencies to treat as externals.
