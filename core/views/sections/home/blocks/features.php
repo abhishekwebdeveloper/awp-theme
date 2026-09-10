@@ -37,7 +37,7 @@ if ( ! $features ) {
 	<div class="
 		awp-home-hero__features-container grid grid-cols-2 gap-2.5 border border-awp-grey-15 bg-awp-grey-08 rounded-xl p-2.5
 		lg:rounded-none lg:grid-cols-4
-		2xl:gap-5
+		2xl:gap-5 2xl:p-5
 	">
 		<?php foreach ( $features as $feature ) : ?>
 			<div class="
