@@ -32,3 +32,15 @@
 .mask-image-investment::before {
 	mask-image: url('img/icons/icon-investment.svg');
 }
+
+.mask-image-bedroom::before {
+	mask-image: url('img/icons/icon-bedroom.svg');
+}
+
+.mask-image-bathroom::before {
+	mask-image: url('img/icons/icon-bathroom.svg');
+}
+
+.mask-image-villa::before {
+	mask-image: url('img/icons/icon-villa.svg');
+}

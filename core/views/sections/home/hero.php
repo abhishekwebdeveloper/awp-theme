@@ -51,7 +51,7 @@ defined( 'ABSPATH' ) || die();
 			">
 				<a
 					class="
-						awp-button awp-button--1 rounded-xl border border-awp-grey-15 px-5 py-3.5 text-sm font-medium text-white w-full text-center
+						awp-button awp-button--1 rounded-xl border border-awp-grey-15 bg-awp-grey-10 px-5 py-3.5 text-sm font-medium text-white w-full text-center
 						lg:w-auto
 						2xl:py-4.5 2xl:px-6 2xl:text-lg
 					"
