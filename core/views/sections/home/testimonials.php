@@ -55,7 +55,7 @@ if ( ! $reviews ) {
 	lg:mt-30 2xl:mt-37
 ">
 	<div class="
-		awp-home-reviews__container relative awp-container pb-32
+		awp-home-reviews__container relative awp-container pb-24
 		lg:pb-0
 	">
 		<div class="
@@ -83,8 +83,8 @@ if ( ! $reviews ) {
 
 			<a
 				class="
-					awp-button awp-button--1 inline-block absolute bottom-0 rounded-lg shrink-0 border border-awp-grey-15 bg-awp-grey-10 px-5 py-3.5 text-sm font-medium text-white text-center self-end
-					lg:static
+					awp-button awp-button--1 w-full inline-block absolute bottom-0 rounded-lg shrink-0 border border-awp-grey-15 bg-awp-grey-10 px-5 py-3.5 text-sm font-medium text-white text-center self-end
+					lg:static lg:w-auto
 					2xl:py-4.5 2xl:px-6 2xl:text-lg
 				"
 				href="<?php echo esc_url( get_the_permalink( 48 ) ); ?>"

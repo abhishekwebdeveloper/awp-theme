@@ -52,7 +52,8 @@ $awp_logo_url = apply_filters( 'awp_theme/mobile_navigation/logo_url', Base::get
 					[
 						'theme_location'  => 'primary',
 						'container'       => 'nav',
-						'container_class' => 'awp-primary-nav awp-nav-accordion',
+						'container_class' => 'awp-primary-nav awp-nav-accordion px-5 py-10 text-white [&_li]:text-xl [&_li]:leading-tight',
+						'menu_class'      => 'flex flex-col gap-5',
 						'depth'           => 3,
 						'fallback_cb'     => false,
 					],
@@ -60,9 +61,43 @@ $awp_logo_url = apply_filters( 'awp_theme/mobile_navigation/logo_url', Base::get
 				?>
 				</div>
 
-				<div class="awp-theme-mobile-navigation__footer">
-				</div>
+				<div class="awp-theme-mobile-navigation__footer px-5 py-8 bg-awp-grey-10">
+					<h3 class="text-xl mb-5">Follow Us</h3>
 
+					<div class="awp-theme-footnote__socials flex items-center gap-2">
+						<a class="awp-theme-footnote__social-link shrink-0" href="#" aria-label="Facebook">
+							<img
+								class="awp-theme-footnote__social-icon h-12 w-12 lg:h-10 lg:w-10 2xl:h-13 2xl:w-13"
+								src="<?php echo esc_url( get_template_directory_uri() . '/core/src/img/icons/facebook.svg' ); ?>"
+								alt="Facebook
+							">
+						</a>
+
+						<a class="awp-theme-footnote__social-link" href="#" aria-label="LinkedIn">
+						<img
+							class="awp-theme-footnote__social-icon h-12 w-12 lg:h-10 lg:w-10 2xl:h-13 2xl:w-13"
+							src="<?php echo esc_url( get_template_directory_uri() . '/core/src/img/icons/linkedin.svg' ); ?>"
+							alt="LinkedIn
+						">
+						</a>
+
+						<a class="awp-theme-footnote__social-link" href="#" aria-label="Twitter">
+						<img
+							class="awp-theme-footnote__social-icon h-12 w-12 lg:h-10 lg:w-10 2xl:h-13 2xl:w-13"
+							src="<?php echo esc_url( get_template_directory_uri() . '/core/src/img/icons/x-twitter.svg' ); ?>"
+							alt="Twitter
+						">
+						</a>
+
+						<a class="awp-theme-footnote__social-link" href="#" aria-label="YouTube">
+						<img
+							class="awp-theme-footnote__social-icon h-12 w-12 lg:h-10 lg:w-10 2xl:h-13 2xl:w-13"
+							src="<?php echo esc_url( get_template_directory_uri() . '/core/src/img/icons/youtube.svg' ); ?>"
+							alt="YouTube
+						">
+						</a>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

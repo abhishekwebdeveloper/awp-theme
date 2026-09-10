@@ -78,7 +78,7 @@
 }
 
 .awp-theme-mobile-navigation__content {
-	background-color: #fff;
+	background-color: #141414;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -92,35 +92,6 @@
 }
 
 .awp-theme-mobile-navigation__logo {
-	height: 68px;
+	height: 48px;
 	width: auto;
-}
-
-.awp-footnote-nav.awp-nav-accordion {
-	border-top: 1px solid var(--awp-color-stone-300);
-	padding-bottom: 0;
-	padding-top: 32px;
-}
-
-.awp-theme-mobile-navigation__footer {
-	background-color: var(--awp-color-stone-900);
-	border-radius: 12px 12px 0 0;
-	margin-top: 40px;
-	padding: 40px 20px 48px;
-}
-
-.awp-theme-mobile-navigation__footer-title {
-	color: var(--awp-color-white-100);
-	font-family: var(--awp-heading-font-family);
-	font-size: 32px;
-	line-height: var(--awp-heading-line-height);
-}
-
-.awp-theme-mobile-navigation__footer-text {
-	color: var(--awp-color-white-100);
-	margin-top: 16px;
-}
-
-.awp-theme-mobile-navigation__footer .awp-button--1 {
-	margin-top: 36px;
 }

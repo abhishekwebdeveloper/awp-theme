@@ -43,7 +43,7 @@ defined( 'ABSPATH' ) || die();
 			<div class="awp-theme-footer-footer__brand flex flex-col gap-5 lg:w-105 lg:shrink-0 lg:gap-6">
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
 					<img
-						class="awp-theme-footer-footer__logo h-8 w-auto"
+						class="awp-theme-footer-footer__logo h-8 w-auto lg:h-8 xl:h-10"
 						src="<?php echo esc_url( get_template_directory_uri() . '/core/src/img/logo.svg' ); ?>"
 						alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>"
 					>
