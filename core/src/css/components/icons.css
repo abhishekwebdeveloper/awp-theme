@@ -16,3 +16,19 @@
 .mask-image-hamburger::before {
 	mask-image: url('img/icons/icon-hamburger.svg');
 }
+
+.mask-image-home::before {
+	mask-image: url('img/icons/icon-home.svg');
+}
+
+.mask-image-property-value::before {
+	mask-image: url('img/icons/icon-property-value.svg');
+}
+
+.mask-image-property::before {
+	mask-image: url('img/icons/icon-property.svg');
+}
+
+.mask-image-investment::before {
+	mask-image: url('img/icons/icon-investment.svg');
+}

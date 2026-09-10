@@ -75,4 +75,6 @@ defined( 'ABSPATH' ) || die();
 			<?php Base::view( 'core/views/sections/home/blocks/stats' ); ?>
 		</div>
 	</div>
+
+	<?php Base::view( 'core/views/sections/home/blocks/features' ); ?>
 </section>
