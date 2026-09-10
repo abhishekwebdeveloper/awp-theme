@@ -44,3 +44,7 @@
 .mask-image-villa::before {
 	mask-image: url('img/icons/icon-villa.svg');
 }
+
+.mask-image-5-star::before {
+	mask-image: url('img/icons/icon-5-star.svg');
+}
