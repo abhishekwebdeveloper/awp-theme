@@ -144,7 +144,7 @@ if ( ! $reviews ) {
 					">
 						<img
 							class="awp-home-review__icon w-auto h-7.5 lg:h-9 2xl:h-11"
-							src="<?php echo esc_url( get_template_directory_uri() . '/core/src/img/icons/icon-5-star.svg' ); ?>"
+							src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/icons/icon-5-star.svg' ); ?>"
 							alt="Icon 5 star"
 						>
 
