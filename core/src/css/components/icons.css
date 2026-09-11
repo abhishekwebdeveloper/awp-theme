@@ -1,0 +1,50 @@
+/* -----------------------------------------------------------------------------
+ * Components > Icons.
+* -------------------------------------------------------------------------- */
+.mask-image-sidekick {
+	position: relative;
+}
+
+.mask-image-sidekick::before {
+	content: '';
+	display: block;
+	mask-position: center center;
+	mask-repeat: no-repeat;
+	mask-size: contain;
+}
+
+.mask-image-hamburger::before {
+	mask-image: url('img/icons/icon-hamburger.svg');
+}
+
+.mask-image-home::before {
+	mask-image: url('img/icons/icon-home.svg');
+}
+
+.mask-image-property-value::before {
+	mask-image: url('img/icons/icon-property-value.svg');
+}
+
+.mask-image-property::before {
+	mask-image: url('img/icons/icon-property.svg');
+}
+
+.mask-image-investment::before {
+	mask-image: url('img/icons/icon-investment.svg');
+}
+
+.mask-image-bedroom::before {
+	mask-image: url('img/icons/icon-bedroom.svg');
+}
+
+.mask-image-bathroom::before {
+	mask-image: url('img/icons/icon-bathroom.svg');
+}
+
+.mask-image-villa::before {
+	mask-image: url('img/icons/icon-villa.svg');
+}
+
+.mask-image-5-star::before {
+	mask-image: url('img/icons/icon-5-star.svg');
+}

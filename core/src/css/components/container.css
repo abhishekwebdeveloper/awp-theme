@@ -1,0 +1,40 @@
+/* -----------------------------------------------------------------------------
+ * Components > Container.
+* -------------------------------------------------------------------------- */
+:root {
+	--awp-container-width: 100%;
+	--awp-container-gap: 20px;
+}
+
+/* MD */
+@media (min-width: 768px) {
+	:root {
+		--awp-container-width: 704px;
+		--awp-container-gap: 32px;
+	}
+}
+
+/* XL */
+@media (min-width: 1280px) {
+	:root {
+		--awp-container-width: 1168px;
+		--awp-container-gap: 40px;
+	}
+}
+
+/* 2XL */
+@media (min-width: 1640px) {
+	:root {
+		--awp-container-width: 1400px;
+	}
+}
+
+.awp-container {
+	margin-inline: auto;
+	max-width: var(--awp-container-width);
+	width: calc(100% - (var(--awp-container-gap) * 2));
+
+	.awp-container {
+		width: 100%;
+	}
+}

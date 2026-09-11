@@ -1,0 +1,84 @@
+/* stylelint-disable custom-property-pattern */
+/* stylelint-disable at-rule-no-unknown */
+
+/* Style Guide */
+
+@theme {
+	/* borderRadius */
+	--radius-*: initial;
+	--radius-none: 0;
+	--radius-sm: 2px;
+	--radius: 4px; /* DEFAULT -> rounded */
+	--radius-md: 6px;
+	--radius-lg: 8px;
+	--radius-xl: 10px;
+	--radius-full: 100vmax;
+
+	/* fontSize */
+	--text-*: initial;
+	--text-xs: 0.75rem; /* 12px */
+	--text-sm: 0.875rem; /* 14px */
+	--text-base: 1rem; /* 16px */
+	--text-lg: 1.125rem; /* 18px */
+	--text-xl: 1.25rem; /* 20px */
+	--text-2xl: 1.5rem; /* 24px */
+	--text-3xl: 1.75rem; /* 28px */
+	--text-4xl: 2rem; /* 32px */
+	--text-5xl: 2.25rem; /* 36px */
+	--text-6xl: 2.625rem; /* 42px */
+	--text-7xl: 3rem; /* 48px */
+	--text-8xl: 3.5rem; /* 56px */
+	--text-9xl: 3.75rem; /* 60px */
+	--text-10xl: 4.125rem; /* 66px */
+	--text-11xl: 4.5rem; /* 72px */
+	--text-12xl: 5rem; /* 80px */
+	--text-13xl: 5.5rem; /* 88px */
+	--text-14xl: 6rem; /* 96px */
+
+	/* lineHeight */
+	--leading-*: initial;
+	--leading-none: 1;
+	--leading-tighter: 1.1;
+	--leading-tight: 1.2;
+	--leading-snug: 1.4;
+	--leading-normal: 1.6;
+	--leading-relaxed: 1.75;
+	--leading-loose: 2;
+
+	/* screens / breakpoints */
+	--breakpoint-*: initial;
+	--breakpoint-xs: 390px;
+	--breakpoint-md: 768px;
+	--breakpoint-lg: 1280px;
+	--breakpoint-xl: 1366px;
+	--breakpoint-2xl: 1640px;
+
+	/* letterSpacing */
+	--tracking-snug: -0.01em;
+
+	/* fontFamily */
+	--font-urbanist: 'Urbanist', sans-serif;
+
+	/* colors */
+	--color-awp-purple-60: #703bf7;
+	--color-awp-purple-65: #8254f8;
+	--color-awp-purple-70: #946cf9;
+	--color-awp-purple-75: #a685fa;
+	--color-awp-purple-90: #dbcefd;
+	--color-awp-purple-95: #ede7fe;
+	--color-awp-purple-97: #f4f0fe;
+	--color-awp-purple-99: #fbfaff;
+	--color-awp-grey-08: #141414;
+	--color-awp-grey-10: #1a1a1a;
+	--color-awp-grey-15: #333;
+	--color-awp-grey-30: #4d4d4d;
+	--color-awp-grey-40: #666;
+	--color-awp-grey-50: #808080;
+	--color-awp-grey-60: #999;
+	--color-awp-grey-70: #b3b3b3;
+	--color-awp-grey-80: #ccc;
+	--color-awp-grey-90: #e6e6e6;
+
+	/* transitionDuration DEFAULT */
+	--default-transition-duration: 350ms;
+}

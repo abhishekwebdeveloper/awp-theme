@@ -4,6 +4,7 @@ import del from 'rollup-plugin-delete'
 import livereload from 'rollup-plugin-livereload'
 import postcss from 'rollup-plugin-postcss'
 import postcssImport from 'postcss-import'
+import tailwindcssPostcss from '@tailwindcss/postcss'
 
 // Rollup plugins.
 import commonjs from '@rollup/plugin-commonjs'
@@ -23,6 +24,7 @@ import livereloadJsCss from './.dev/rollup/plugin-livereload-js-css.js'
 // from silently becoming bundles.
 const entryPoints = {
 	core: 'core/src/core.js',
+	alpine: 'core/src/alpine.js',
 	// 'core-admin': 'core/src/core-admin.js',
 	// woocommerce: 'plugins/Woocommerce/src/woocommerce.js',
 	// 'woocommerce-admin': 'plugins/Woocommerce/src/woocommerce-admin.js',
@@ -31,7 +33,7 @@ const entryPoints = {
 
 // Folders to copy to the assets folder.
 const copyFolders = {
-	// 'assets/img': ['src/img/**/*'],
+	assets: ['core/src/img'],
 }
 
 // WordPress dependencies to treat as externals.
@@ -89,7 +91,7 @@ const configs = Object.keys(entryPoints).map((name, index) => ({
 			extract: `${name}.css`,
 			minimize: !isDev, // Minify production builds.
 			sourceMap: isDev, // Source maps in dev only.
-			plugins: [postcssImport(), autoprefixer()],
+			plugins: [postcssImport(), tailwindcssPostcss(), autoprefixer()],
 		}),
 
 		// Minify production builds.

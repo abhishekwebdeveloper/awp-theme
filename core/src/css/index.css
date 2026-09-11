@@ -5,13 +5,15 @@
 @layer theme, base, components, pages, utilities;
 
 /* Theme. */
-@import './theme/colors.css' layer(theme);
-@import './theme/keyframes.css' layer(theme);
-@import './theme/radius.css' layer(theme);
-@import './theme/shadows.css' layer(theme);
-@import './theme/spacing.css' layer(theme);
+@import './theme/styleguide.css' layer(theme);
 @import './theme/transitions.css' layer(theme);
-@import './theme/typography.css' layer(theme);
 
 /* Base. */
-@import './base/preflight.css' layer(base);
+@import './base/tailwind.css' layer(base);
+@import './base/admin-bar.css' layer(base);
+@import './base/tags.css' layer(base);
+
+/* Components. */
+@import './components/container.css' layer(components);
+@import './components/mobile-navigation.css' layer(components);
+@import './components/icons.css' layer(components);

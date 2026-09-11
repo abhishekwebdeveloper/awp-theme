@@ -23,11 +23,55 @@ class Scripts {
 	 * Run boot tasks.
 	 */
 	protected static function on_boot(): void {
+		// Enqueue vendor scripts.
+		add_action( 'wp_enqueue_scripts', [ self::class, 'enqueue_vendor_scripts' ], 100 );
+
+		// Enqueue Alpine.js scripts.
+		add_action( 'wp_enqueue_scripts', [ self::class, 'enqueue_alpinejs' ], 150 );
+
 		// Enqueue main scripts.
 		add_action( 'wp_enqueue_scripts', [ self::class, 'enqueue_main_scripts' ], 200 );
 
 		// Enqueue WordPress scripts.
 		add_action( 'wp_enqueue_scripts', [ self::class, 'enqueue_wp_scripts' ], 600 );
+	}
+
+		/**
+		 * Enqueue vendor scripts.
+		 */
+	public static function enqueue_vendor_scripts(): void {
+		// Google font: Urbanist.
+		wp_enqueue_style(
+			'google-font-urbanist',
+			'https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap',
+			[],
+			'1.0.0'
+		);
+	}
+
+	/**
+	 * Enqueue Alpine.js scripts.
+	 */
+	public static function enqueue_alpinejs(): void {
+		$slug      = Base::get_info( 'slug' );
+		$base_url  = Base::get_info( 'url' );
+		$base_path = Base::get_info( 'path' );
+
+		$js_relative = 'assets/alpine.js';
+		$js_path     = $base_path . $js_relative;
+
+		// Bail if the build output is missing.
+		if ( ! file_exists( $js_path ) ) {
+			return;
+		}
+
+		wp_enqueue_script(
+			$slug . '-alpine',
+			$base_url . $js_relative,
+			[],
+			(string) filemtime( $js_path ),
+			[ 'in_footer' => true ]
+		);
 	}
 
 	/**
