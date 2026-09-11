@@ -33,10 +33,10 @@ if ( ! $features ) {
 }
 ?>
 
-<div class="awp-home-hero__features px-(--awp-container-gap) mt-10 lg:mt-0 lg:px-0">
+<div class="awp-home-hero__features mt-10 lg:mt-0">
 	<div class="
-		awp-home-hero__features-container grid grid-cols-2 gap-2.5 border border-awp-grey-15 bg-awp-grey-08 rounded-xl p-2.5
-		lg:rounded-none lg:grid-cols-4
+		awp-home-hero__features-container awp-container grid grid-cols-2 gap-2.5 border border-awp-grey-15 bg-awp-grey-08 rounded-xl p-2.5
+		lg:rounded-none lg:grid-cols-4 lg:[--awp-container-width:100%] lg:[--awp-container-gap:0px]
 		2xl:gap-5 2xl:p-5
 	">
 		<?php foreach ( $features as $feature ) : ?>

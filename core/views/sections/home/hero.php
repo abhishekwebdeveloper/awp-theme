@@ -12,7 +12,7 @@ defined( 'ABSPATH' ) || die();
 ?>
 
 <section class="awp-home-hero">
-	<div class="awp-home-hero__container px-(--awp-container-gap) pt-10 lg:flex lg:px-0 lg:pt-0">
+	<div class="awp-home-hero__container awp-container pt-10 lg:flex lg:pt-0 lg:[--awp-container-width:100%] lg:[--awp-container-gap:0px]">
 		<div class="
 			awp-home-hero__image pb-8
 			lg:mb-0 lg:pb-0 lg:shrink-0 lg:order-last

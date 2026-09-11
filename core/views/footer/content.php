@@ -37,7 +37,7 @@ defined( 'ABSPATH' ) || die();
 	</div>
 </div>
 
-<footer class="awp-theme-footer-footer">
+<div class="awp-theme-footer-main">
 	<div class="awp-container">
 		<div class="awp-theme-footer-footer__top flex flex-col gap-16 py-16 lg:flex-row lg:py-20">
 			<div class="awp-theme-footer-footer__brand flex flex-col gap-5 lg:w-105 lg:shrink-0 lg:gap-6">
@@ -95,4 +95,4 @@ defined( 'ABSPATH' ) || die();
 	</div>
 
 	<?php Base::view( 'core/views/footer/footnote' ); ?>
-</footer>
+</div>
