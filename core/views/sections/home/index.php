@@ -1,6 +1,6 @@
 <?php
 /**
- * Hero section for the home page.
+ * Sections for the home page.
  *
  * @package abhishekWebDeveloper\AwpTheme
  * @author  abhishekWebDeveloper
