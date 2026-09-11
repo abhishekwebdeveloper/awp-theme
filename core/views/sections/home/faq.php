@@ -21,6 +21,25 @@ $faqs = [
 		'title'       => 'How can I contact an Estatein agent?',
 		'description' => 'Discover the different ways you can get in touch with our experienced agents.',
 	],
+	[
+		'title'       => 'How can I contact an Estatein agent?',
+		'description' => 'Discover the different ways you can get in touch with our experienced agents.',
+	],
+
+	[
+		'title'       => 'How can I contact an Estatein agent?',
+		'description' => 'Discover the different ways you can get in touch with our experienced agents.',
+	],
+
+	[
+		'title'       => 'How can I contact an Estatein agent?',
+		'description' => 'Discover the different ways you can get in touch with our experienced agents.',
+	],
+
+	[
+		'title'       => 'How can I contact an Estatein agent?',
+		'description' => 'Discover the different ways you can get in touch with our experienced agents.',
+	],
 ];
 
 // Do not proceed if there are no faqs.
@@ -34,7 +53,7 @@ if ( ! $faqs ) {
 	lg:mt-30 2xl:mt-37
 ">
 	<div class="
-		awp-home-faq__container relative awp-container pb-24
+		awp-home-faq__container relative awp-container
 		lg:pb-0
 	">
 		<div class="
@@ -62,8 +81,8 @@ if ( ! $faqs ) {
 
 			<a
 				class="
-					awp-button awp-button--1 w-full inline-block absolute bottom-0 rounded-lg shrink-0 border border-awp-grey-15 bg-awp-grey-10 px-5 py-3.5 text-sm font-medium text-white text-center self-end
-					lg:static lg:w-auto
+					awp-button awp-button--1 inline-block z-30 mt-2 absolute bottom-0 rounded-lg shrink-0 border border-awp-grey-15 bg-awp-grey-10 px-5 py-3.5 text-sm font-medium text-white text-center self-end
+					lg:static
 					2xl:py-4.5 2xl:px-6 2xl:text-lg
 				"
 				href="<?php echo esc_url( get_the_permalink( 45 ) ); ?>"
@@ -72,48 +91,59 @@ if ( ! $faqs ) {
 			</a>
 		</div>
 
-		<div class="
-			awp-home-faq__list mt-10 grid grid-cols-1 gap-8
-			lg:grid-cols-3 lg:mt-15 lg:gap-5
-			2xl:mt-20 2xl:gap-8
-		">
-			<?php foreach ( $faqs as $faq ) : ?>
-				<div class="
-					awp-home-faq__card rounded-[12px] border border-awp-grey-15 bg-awp-grey-08
-					p-7.5
-					lg:p-10
-					2xl:p-12.5
-				">
-					<a href="#" class="awp-home-faq__link">
-						<h3 class="
-							awp-home-faq__card-title text-lg text-white font-semibold
-							lg:text-xl
-							2xl:text-2xl
-						">
-							<?php echo esc_html( $faq['title'] ); ?>
-						</h3>
-					</a>
-
+		<div
+			class="
+				awp-home-faq__list swiper mt-10 grid grid-cols-1 gap-8
+				lg:grid-cols-3 lg:mt-15 lg:gap-5
+				2xl:mt-20 2xl:gap-8
+			"
+			data-awp-card-slider
+		>
+			<div class="swiper-wrapper">
+				<?php foreach ( $faqs as $faq ) : ?>
 					<div class="
-						awp-home-faq__card-description mt-5 text-sm
-						lg:text-base lg:mt-6
-						2xl:text-lg 2xl:mt-7.5
+						awp-home-faq__card swiper-slide rounded-[12px] border border-awp-grey-15 bg-awp-grey-08
+						p-7.5
+						lg:p-10
+						2xl:p-12.5
 					">
-						<?php echo wp_kses_post( $faq['description'] ); ?>
-					</div>
+						<a href="#" class="awp-home-faq__link">
+							<h3 class="
+								awp-home-faq__card-title text-lg text-white font-semibold
+								lg:text-xl
+								2xl:text-2xl
+							">
+								<?php echo esc_html( $faq['title'] ); ?>
+							</h3>
+						</a>
 
-					<a
-						class="
-							awp-button awp-button--1 block rounded-lg mt-5 shrink-0 border border-awp-grey-15 bg-awp-grey-10 px-5 py-3.5 text-sm font-medium text-white text-center
-							lg:mt-6 lg:w-fit
-							2xl:py-4.5 2xl:px-6 2xl:text-lg 2xl:mt-7.5
-						"
-						href="#"
-					>
-						Read More
-					</a>
-				</div>
-			<?php endforeach; ?>
+						<div class="
+							awp-home-faq__card-description mt-5 text-sm
+							lg:text-base lg:mt-6
+							2xl:text-lg 2xl:mt-7.5
+						">
+							<?php echo wp_kses_post( $faq['description'] ); ?>
+						</div>
+
+						<a
+							class="
+								awp-button awp-button--1 block rounded-lg mt-5 shrink-0 border border-awp-grey-15 bg-awp-grey-10 px-5 py-3.5 text-sm font-medium text-white text-center
+								lg:mt-6 lg:w-fit
+								2xl:py-4.5 2xl:px-6 2xl:text-lg 2xl:mt-7.5
+							"
+							href="#"
+						>
+							Read More
+						</a>
+					</div>
+				<?php endforeach; ?>
+			</div>
+
+			<div class="awp-home-faq__bottom border-t border-awp-grey-15 pt-4 mt-7.5 flex items-center justify-end gap-2.5 [&_svg]:h-5! [&_svg]:w-5!">
+				<div class="swiper-button-prev static! m-0! rounded-full border border-awp-grey-15 text-white! lg:ml-auto!"></div>
+				<div class="swiper-pagination static! m-0! w-auto! text-white! lg:-order-1"></div>
+				<div class="swiper-button-next static! m-0! rounded-full border border-awp-grey-15 text-white!"></div>
+			</div>
 		</div>
 	</div>
 </section>

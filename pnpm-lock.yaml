@@ -11,6 +11,9 @@ importers:
       alpinejs:
         specifier: ^3.17.2
         version: 3.17.2
+      swiper:
+        specifier: ^14.2.0
+        version: 14.2.0
       tailwindcss:
         specifier: ^4.3.3
         version: 4.3.3
@@ -2559,6 +2562,10 @@ packages:
     resolution: {integrity: sha512-2GJ4h3rl13qYTdwllaK6QlL8tG+UrM8626V2Ylcd/yBUv2Y/EwLsYisVV6UDCRmlk+C74G8nMpxJCk0RWPdDCw==}
     engines: {node: '>=10.13.0'}
     hasBin: true
+
+  swiper@14.2.0:
+    resolution: {integrity: sha512-GsL4M9Fq7Sg22OyL3SjdNj/0bxTfIxPJJHHW394Li0u5vYtExi0a09iBUc8CuLafJi5pAlH2AHUe1PocxHl45g==}
+    engines: {node: '>= 4.7.0'}
 
   table@6.9.0:
     resolution: {integrity: sha512-9kY+CygyYM6j02t5YFHbNz2FN5QmYGv9zAjVp4lCDjlCw7amdckXlEt/bjMhUIfj4ThGRE4gCUH5+yGnNuPo5A==}
@@ -5166,6 +5173,8 @@ snapshots:
       picocolors: 1.1.1
       sax: 1.6.1
       stable: 0.1.8
+
+  swiper@14.2.0: {}
 
   table@6.9.0:
     dependencies:

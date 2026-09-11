@@ -42,6 +42,39 @@ $reviews = [
 			],
 		],
 	],
+	[
+		'title'       => 'Trusted Advisors',
+		'description' => 'The Estatein team guided us through the entire buying process. Their knowledge and commitment to our needs were impressive. Thank you for your support!',
+		'author'      => [
+			[
+				'image_id' => '51',
+				'name'     => 'John Mans',
+				'location' => 'USA, Nevada',
+			],
+		],
+	],
+	[
+		'title'       => 'Trusted Advisors',
+		'description' => 'The Estatein team guided us through the entire buying process. Their knowledge and commitment to our needs were impressive. Thank you for your support!',
+		'author'      => [
+			[
+				'image_id' => '51',
+				'name'     => 'John Mans',
+				'location' => 'USA, Nevada',
+			],
+		],
+	],
+	[
+		'title'       => 'Trusted Advisors',
+		'description' => 'The Estatein team guided us through the entire buying process. Their knowledge and commitment to our needs were impressive. Thank you for your support!',
+		'author'      => [
+			[
+				'image_id' => '51',
+				'name'     => 'John Mans',
+				'location' => 'USA, Nevada',
+			],
+		],
+	],
 ];
 
 	// Do not proceed if there are no featured reviews.
@@ -55,7 +88,7 @@ if ( ! $reviews ) {
 	lg:mt-30 2xl:mt-37
 ">
 	<div class="
-		awp-home-reviews__container relative awp-container pb-24
+		awp-home-reviews__container relative awp-container
 		lg:pb-0
 	">
 		<div class="
@@ -83,8 +116,8 @@ if ( ! $reviews ) {
 
 			<a
 				class="
-					awp-button awp-button--1 w-full inline-block absolute bottom-0 rounded-lg shrink-0 border border-awp-grey-15 bg-awp-grey-10 px-5 py-3.5 text-sm font-medium text-white text-center self-end
-					lg:static lg:w-auto
+					awp-button awp-button--1 inline-block mt-2 z-30 absolute bottom-0 rounded-lg shrink-0 border border-awp-grey-15 bg-awp-grey-10 px-5 py-3.5 text-sm font-medium text-white text-center self-end
+					lg:static
 					2xl:py-4.5 2xl:px-6 2xl:text-lg
 				"
 				href="<?php echo esc_url( get_the_permalink( 48 ) ); ?>"
@@ -93,64 +126,75 @@ if ( ! $reviews ) {
 			</a>
 		</div>
 
-		<div class="
-			awp-home-reviews__list mt-10 grid grid-cols-1 gap-8
-			lg:grid-cols-3 lg:mt-15 lg:gap-5
-			2xl:mt-20 2xl:gap-8
-		">
-			<?php foreach ( $reviews as $review ) : ?>
-				<div class="
-					awp-home-reviews__card rounded-[12px] border border-awp-grey-15 bg-awp-grey-08
-					p-7.5
-					lg:p-10
-					2xl:p-12.5
-				">
-					<img
-						class="awp-home-review__icon w-auto h-7.5 lg:h-9 2xl:h-11"
-						src="<?php echo esc_url( get_template_directory_uri() . '/core/src/img/icons/icon-5-star.svg' ); ?>"
-						alt="Icon 5 star"
-					>
-
-					<h3 class="
-						awp-home-reviews__card-title text-lg mt-6 text-white font-semibold
-						lg:text-xl lg:mt-7.5
-						2xl:text-2xl 2xl:mt-10
-					">
-						<?php echo esc_html( $review['title'] ); ?>
-					</h3>
-
+		<div
+			class="
+				awp-home-reviews__list swiper mt-10 grid grid-cols-1 gap-8
+				lg:grid-cols-3 lg:mt-15 lg:gap-5
+				2xl:mt-20 2xl:gap-8
+			"
+			data-awp-card-slider
+		>
+			<div class="swiper-wrapper">
+				<?php foreach ( $reviews as $review ) : ?>
 					<div class="
-						awp-home-reviews__card-description mt-1.5 text-sm text-white text-pretty
-						lg:text-base lg:mt-2.5
-						2xl:text-lg 2xl:mt-3.5
+						awp-home-reviews__card swiper-slide rounded-[12px] border border-awp-grey-15 bg-awp-grey-08
+						p-7.5
+						lg:p-10
+						2xl:p-12.5
 					">
-						<?php echo wp_kses_post( $review['description'] ); ?>
-					</div>
+						<img
+							class="awp-home-review__icon w-auto h-7.5 lg:h-9 2xl:h-11"
+							src="<?php echo esc_url( get_template_directory_uri() . '/core/src/img/icons/icon-5-star.svg' ); ?>"
+							alt="Icon 5 star"
+						>
 
-					<div class="awp-home-reviews__author flex items-center gap-2.5 mt-6 lg:mt-7.5 lg:gap-3 2xl:mt-10">
-						<?php foreach ( $review['author'] as $author ) : ?>
-							<?php
-							echo wp_get_attachment_image(
-								$author['image_id'],
-								'medium',
-								false,
-								[ 'class' => 'awp-home-reviews__author--img h-12 w-12 rounded-full object-cover 2xl:h-15 2xl:w-15' ],
-							);
-							?>
+						<h3 class="
+							awp-home-reviews__card-title text-lg mt-6 text-white font-semibold
+							lg:text-xl lg:mt-7.5
+							2xl:text-2xl 2xl:mt-10
+						">
+							<?php echo esc_html( $review['title'] ); ?>
+						</h3>
 
-						<div class="awp-home-reviews__author-content">
-							<p class="awp-home-reviews__author-name text-base text-white font-medium lg:text-lg 2xl:text-xl">
-								<?php echo esc_html( $author['name'] ); ?>
-							</p>
-
-							<p class="awp-home-reviews__author-location text-base font-medium lg:text-lg 2xl:text-xl">
-								<?php echo esc_html( $author['location'] ); ?>
-							</p>
+						<div class="
+							awp-home-reviews__card-description mt-1.5 text-sm text-white text-pretty
+							lg:text-base lg:mt-2.5
+							2xl:text-lg 2xl:mt-3.5
+						">
+							<?php echo wp_kses_post( $review['description'] ); ?>
 						</div>
-						<?php endforeach; ?>
+
+						<div class="awp-home-reviews__author flex items-center gap-2.5 mt-6 lg:mt-7.5 lg:gap-3 2xl:mt-10">
+							<?php foreach ( $review['author'] as $author ) : ?>
+								<?php
+								echo wp_get_attachment_image(
+									$author['image_id'],
+									'medium',
+									false,
+									[ 'class' => 'awp-home-reviews__author--img h-12 w-12 rounded-full object-cover 2xl:h-15 2xl:w-15' ],
+								);
+								?>
+
+							<div class="awp-home-reviews__author-content">
+								<p class="awp-home-reviews__author-name text-base text-white font-medium lg:text-lg 2xl:text-xl">
+									<?php echo esc_html( $author['name'] ); ?>
+								</p>
+
+								<p class="awp-home-reviews__author-location text-base font-medium lg:text-lg 2xl:text-xl">
+									<?php echo esc_html( $author['location'] ); ?>
+								</p>
+							</div>
+							<?php endforeach; ?>
+						</div>
 					</div>
-				</div>
-			<?php endforeach; ?>
+				<?php endforeach; ?>
+			</div>
+
+			<div class="awp-home-faq__bottom border-t border-awp-grey-15 pt-4 mt-7.5 flex items-center justify-end gap-2.5 [&_svg]:h-5! [&_svg]:w-5!">
+				<div class="swiper-button-prev static! m-0! rounded-full border border-awp-grey-15 text-white! lg:ml-auto!"></div>
+				<div class="swiper-pagination static! m-0! w-auto! text-white! lg:-order-1"></div>
+				<div class="swiper-button-next static! m-0! rounded-full border border-awp-grey-15 text-white!"></div>
+			</div>
 		</div>
 	</div>
 </section>
