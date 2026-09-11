@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) || die();
 			<a class="awp-theme-footnote__social-link shrink-0" href="#" aria-label="Facebook">
 				<img
 					class="awp-theme-footnote__social-icon h-12 w-12 lg:h-10 lg:w-10 2xl:h-13 2xl:w-13"
-					src="<?php echo esc_url( get_template_directory_uri() . '/core/src/img/icons/facebook.svg' ); ?>"
+					src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/icons/facebook.svg' ); ?>"
 					alt="Facebook
 				">
 			</a>
@@ -23,7 +23,7 @@ defined( 'ABSPATH' ) || die();
 			<a class="awp-theme-footnote__social-link" href="#" aria-label="LinkedIn">
 				<img
 					class="awp-theme-footnote__social-icon h-12 w-12 lg:h-10 lg:w-10 2xl:h-13 2xl:w-13"
-					src="<?php echo esc_url( get_template_directory_uri() . '/core/src/img/icons/linkedin.svg' ); ?>"
+					src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/icons/linkedin.svg' ); ?>"
 					alt="LinkedIn
 				">
 			</a>
@@ -31,7 +31,7 @@ defined( 'ABSPATH' ) || die();
 			<a class="awp-theme-footnote__social-link" href="#" aria-label="Twitter">
 				<img
 					class="awp-theme-footnote__social-icon h-12 w-12 lg:h-10 lg:w-10 2xl:h-13 2xl:w-13"
-					src="<?php echo esc_url( get_template_directory_uri() . '/core/src/img/icons/x-twitter.svg' ); ?>"
+					src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/icons/x-twitter.svg' ); ?>"
 					alt="Twitter
 				">
 			</a>
@@ -39,7 +39,7 @@ defined( 'ABSPATH' ) || die();
 			<a class="awp-theme-footnote__social-link" href="#" aria-label="YouTube">
 				<img
 					class="awp-theme-footnote__social-icon h-12 w-12 lg:h-10 lg:w-10 2xl:h-13 2xl:w-13"
-					src="<?php echo esc_url( get_template_directory_uri() . '/core/src/img/icons/youtube.svg' ); ?>"
+					src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/icons/youtube.svg' ); ?>"
 					alt="YouTube
 				">
 			</a>

@@ -12,7 +12,7 @@ defined( 'ABSPATH' ) || die();
 ?>
 
 <div class="awp-theme-footer-cta border-y border-awp-grey-15 mt-20 relative lg:mt-24">
-	<img class="awp-theme-footer-cta__bg absolute inset-0 h-full w-full pointer-none -z-1 object-bottom-right object-cover" src="<?php echo esc_url( get_template_directory_uri() . '/core/src/img/cta-bg.png' ); ?>" alt="">
+	<img class="awp-theme-footer-cta__bg absolute inset-0 h-full w-full pointer-none -z-1 object-bottom-right object-cover" src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/cta-bg.png' ); ?>" alt="">
 
 	<div class="awp-theme-footer-cta__container awp-container flex flex-col items-start gap-10  py-16 lg:flex-row lg:items-center lg:justify-between lg:py-24">
 		<div class="awp-theme-footer-cta__text max-w-2xl">
@@ -44,7 +44,7 @@ defined( 'ABSPATH' ) || die();
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
 					<img
 						class="awp-theme-footer-footer__logo h-8 w-auto lg:h-8 xl:h-10"
-						src="<?php echo esc_url( get_template_directory_uri() . '/core/src/img/logo.svg' ); ?>"
+						src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/logo.svg' ); ?>"
 						alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>"
 					>
 				</a>
